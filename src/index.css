@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-core: #04060a;
+    --bg-surface: #080c14;
+    --bg-surface-elevated: #0f1624;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --accent-primary: #6366f1;
+    --accent-cyan: #00f0ff;
+    --accent-neon: #00f5d4;
+    --accent-magenta: #f72585;
+    --accent-amber: #fbbf24;
+    --accent-emerald: #10b981;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --card-min-width: 280px;
+  }
+
+  body.theme-minimal {
+    --bg-core: #08090d;
+    --bg-surface: #0f1118;
+    --bg-surface-elevated: #151822;
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --accent-primary: #64748b;
+    --accent-cyan: #94a3b8;
+    --accent-neon: #cbd5e1;
+    --accent-magenta: #64748b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #64748b;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-core);
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(0, 240, 255, 0.04), transparent);
+  color: var(--text-primary);
+  user-select: none;
+  overflow: hidden;
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Electron Window Drag Utilities */
+.app-drag-region {
+  -webkit-app-region: drag;
+}
+
+.app-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* High-Precision, Smooth Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 9999px;
+  cursor: grab;
+  transition: background-color 0.15s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(99, 102, 241, 0.85);
+  cursor: grabbing;
+}
+
+/* Glassmorphic Luxury Panels */
+.glass-panel {
+  background: rgba(10, 15, 26, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.theme-minimal .glass-panel {
+  background: rgba(15, 17, 24, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-elevated {
+  background: rgba(14, 20, 34, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.theme-minimal .glass-panel-elevated {
+  background: rgba(18, 21, 29, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.75);
+}
+
+/* Card Hover Transitions & GPU Virtualization Containment */
+.dof-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 280px 240px;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.dof-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 14px 32px -6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+.theme-minimal .dof-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.85);
+}
+
+/* Floating PiP Pop-out Animations */
+@keyframes popBreakFree {
+  0% {
+    transform: scale(0.92) translateY(12px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.02) translateY(-2px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-break-free {
+  animation: popBreakFree 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Video Filter Overlay Effects */
+.filter-crt-overlay {
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+}
+
+.filter-nightvision-overlay {
+  background: radial-gradient(circle, rgba(0, 255, 128, 0.12) 0%, rgba(0, 40, 15, 0.75) 100%), repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0px, rgba(0, 0, 0, 0.25) 2px, transparent 2px, transparent 4px);
+  pointer-events: none;
+}
+
+.filter-grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
